@@ -9,6 +9,9 @@ TagManager:
   - Mickey
   - Zombie
   - Drake
+  - Bullet
+  - FirstWave
+  - ExtraPoint
   layers:
   - Default
   - TransparentFX

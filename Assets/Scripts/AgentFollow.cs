@@ -12,6 +12,7 @@ public class AgentFollow : MonoBehaviour
     void Start()
     {
         EnemyAgent = GetComponent<NavMeshAgent>();
+        
     }
     
 
@@ -19,6 +20,30 @@ public class AgentFollow : MonoBehaviour
     void Update()
     {
         EnemyAgent.SetDestination(PlayerPositionReader.PlayerPosition);
-           
+        
+        if (EnemyAgent.remainingDistance <3.5f&&EnemyAgent.remainingDistance>0)
+        {
+            
+            switch (this.gameObject.tag)
+            {
+                case "Mickey":
+                    this.GetComponent<Animator>().SetBool("isCatching", true);
+                    Invoke("EnemyTriggered", 0.8f);
+                    break;
+                case "Zombie":
+                    this.GetComponent<Animator>().SetBool("isCatching", true);
+                    Invoke("EnemyTriggered", 0.8f);
+                    break;
+                case "Drake":
+                    this.GetComponent<Animator>().SetBool("isCatching", true);
+                    Invoke("EnemyTriggered", 0.8f);
+                    break;
+            }
+        }
+    }
+    public void EnemyTriggered()
+    {
+        GameManager.instance.EndGame();
+        GameManager.instance.OnLevelFailed();
     }
 }

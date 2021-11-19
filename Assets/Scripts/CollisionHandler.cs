@@ -29,18 +29,18 @@ public class CollisionHandler : MonoBehaviour
             case "Finish":
                 OnFinish();
                 break;
-            case "Mickey":
-                MickeyAnimator.SetBool("isCatching", true);
-                Invoke("EnemyTriggered",0.6f);
+            /*case "Mickey":
+                other.GetComponent<Animator>().SetBool("isCatching", true);
+                Invoke("EnemyTriggered",0.8f);
                 break;
             case "Zombie":
-                ZombieAnimator.SetBool("isCatching", true);
-                Invoke("EnemyTriggered", 0.6f);
+                other.GetComponent<Animator>().SetBool("isCatching", true);
+                Invoke("EnemyTriggered", 0.8f);
                 break;
             case "Drake":
-                DrakeAnimator.SetBool("isCatching", true);
-                Invoke("EnemyTriggered", 0.6f);
-                break;
+                other.GetComponent<Animator>().SetBool("isCatching", true);
+                Invoke("EnemyTriggered", 0.8f);
+                break;*/
         }
     }
     public void OnFinish()

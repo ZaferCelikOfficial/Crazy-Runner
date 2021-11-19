@@ -30,4 +30,9 @@ public class ForceCube : MonoBehaviour
     {
         rb.AddTorque(new Vector3(xForce,yForce));
     }
+
+
+
+
+
 }

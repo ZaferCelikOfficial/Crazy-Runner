@@ -977,6 +977,7 @@ GameObject:
   - component: {fileID: 4378879653704104005}
   - component: {fileID: 4378879653704104011}
   - component: {fileID: 4378879653704104010}
+  - component: {fileID: 3981739471606357457}
   m_Layer: 0
   m_Name: Drake
   m_TagString: Drake
@@ -1029,8 +1030,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 3
-  m_Height: 2.3349047
+  m_Radius: 0.7
+  m_Height: 1.3
   m_Direction: 1
   m_Center: {x: 0, y: 0.66745234, z: 0}
 --- !u!114 &4378879653704104011
@@ -1054,10 +1055,10 @@ NavMeshAgent:
   m_GameObject: {fileID: 3460328060782036248}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.6
   m_Speed: 2.5
   m_Acceleration: 8
-  avoidancePriority: 50
+  avoidancePriority: 60
   m_AngularSpeed: 250
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
@@ -1065,8 +1066,20 @@ NavMeshAgent:
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 0
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
+--- !u!114 &3981739471606357457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3460328060782036248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d6dd960731679f4fb26bae15bef033b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3650881226712011068
 GameObject:
   m_ObjectHideFlags: 0

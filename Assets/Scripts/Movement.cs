@@ -5,14 +5,14 @@ using UnityEngine.InputSystem;
 public class Movement : MonoBehaviour
 {
     CharacterController PlayerCharacterController;
-    [SerializeField] float Speed= 4f;
+    [SerializeField] float Speed= 2f;
     InputController PlayerInputController;
     Vector2 ReadingValue;
     Vector3 MovementValue;
     [SerializeField] GameObject PlayerModel;
     Animator PlayerAnimator;
-    float MinSpeed = 4f;
-    float MaxSpeed = 8f;
+    float MinSpeed = 2f;
+    float MaxSpeed = 4f;
 
     void Awake()
     {
@@ -46,7 +46,7 @@ public class Movement : MonoBehaviour
         if (PlayerAnimator.GetBool("isWalking"))
         {
             Speed = Mathf.Clamp(Speed+Time.deltaTime, MinSpeed, MaxSpeed);
-            PlayerAnimator.SetFloat("Blend", (Speed - MinSpeed) / 4f);
+            PlayerAnimator.SetFloat("Blend", (Speed - MinSpeed) / 2f);
             /*if(!PlayerAnimator.GetBool("isRunning")&&Speed>(MinSpeed+1.5f))
             {
                 PlayerAnimator.SetBool("isRunning", true);
@@ -59,15 +59,15 @@ public class Movement : MonoBehaviour
         if (GameManager.isGameStarted&&!GameManager.isGameEnded)
         {
             this.transform.GetComponent<CharacterController>().Move(this.transform.forward * Speed * Time.deltaTime);
-            PlayerCharacterController.Move(MovementValue * Speed * Time.deltaTime);
+            //PlayerCharacterController.Move(MovementValue * Speed * Time.deltaTime);
         }
         
     }
     void MovementInput(InputAction.CallbackContext context)
     {
-        Debug.Log(context.ReadValue<Vector2>());
+        //Debug.Log(context.ReadValue<Vector2>());
         ReadingValue = context.ReadValue<Vector2>();
-        MovementValue.x = ReadingValue.x;
+        //MovementValue.x = ReadingValue.x;
         MovementValue.z = ReadingValue.y ;
         /*if(ReadingValue.x!=0|| ReadingValue.y!=0)
         {
@@ -85,12 +85,12 @@ public class Movement : MonoBehaviour
             PlayerAnimator.SetBool("isRunning", false);
         }*/
     }
-    void MouseMovementInput(InputAction.CallbackContext context)
+    /*void MouseMovementInput(InputAction.CallbackContext context)
     {
         Debug.Log(context.ReadValue<Vector2>());
         ReadingValue = context.ReadValue<Vector2>();
         MovementValue.x = ReadingValue.x/4f;
-    }
+    }*/
     void GravityControl()
     {
         if(PlayerCharacterController.isGrounded)

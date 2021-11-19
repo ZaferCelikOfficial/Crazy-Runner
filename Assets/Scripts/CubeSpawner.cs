@@ -20,14 +20,24 @@ public class CubeSpawner : MonoBehaviour
     {
         //Instantiate(MickeyPrefab, SpawnArea.transform.position, Quaternion.identity);
         //AgentFollow.EnemyAgent.SetDestination(PlayerModel.transform.position);
-        for (int i=0; i<10;i++)
+        if (other.gameObject.tag == "Player")
         {
-            ObjectPooler.Instance.SpawnForGameObject("Mickey", SpawnArea.transform.position, Quaternion.identity);
-            MickeyAnimator = MickeyPrefab.GetComponent<Animator>();
-            ZombieAnimator = ZombiePrefab.GetComponent<Animator>();
-            DrakeAnimator = DrakePrefab.GetComponent<Animator>();
-            MickeyAnimator.SetBool("isCatching", false);
-        }
+            switch (this.gameObject.tag)
+            {
+                case "FirstWave":
+                    for (int i = 0; i < 3; i++)
+                    {
+                        GameObject instantiatedMickey = ObjectPooler.Instance.SpawnForGameObject("Mickey", SpawnArea.transform.position, Quaternion.identity);
+                        MickeyAnimator = instantiatedMickey.GetComponent<Animator>();
+                        //ZombieAnimator = instantiatedZombie.GetComponent<Animator>();
+                        //DrakeAnimator = instantiatedDrake.GetComponent<Animator>();
+                        //MickeyAnimator.SetBool("isCatching", false);
+                    }
+                    GameObject instantiatedZombie = ObjectPooler.Instance.SpawnForGameObject("Zombie", SpawnArea.transform.position, Quaternion.identity);
+
+                    break;
+            }
+        }        
     }
     // Update is called once per frame
     void Update()

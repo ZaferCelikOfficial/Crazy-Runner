@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public static bool isGameStarted;
     public static bool isGameEnded;
 
-    public GameObject LevelCompletedPanel, LevelFailedPanel;
+    public GameObject LevelCompletedPanel, LevelFailedPanel,CrosshairPanel;
     public List<GameObject> Levels = new List<GameObject>();
     [SerializeField] int LevelIndex = 0;
 
@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
     {
         isGameStarted = true;
         isGameEnded = false;
+        CrosshairPanel.SetActive(true);
     }
     public void EndGame()
     {
@@ -44,10 +45,12 @@ public class GameManager : MonoBehaviour
     public void OnLevelCompleted()
     {
         LevelCompletedPanel.SetActive(true);
+        CrosshairPanel.SetActive(false);
     }
     public void OnLevelFailed()
     {
         LevelFailedPanel.SetActive(true);
+        CrosshairPanel.SetActive(false);
     }
     public void RestartLevel()
     {
