@@ -7,7 +7,6 @@ public class AgentFollow : MonoBehaviour
 {
     NavMeshAgent EnemyAgent;
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +39,7 @@ public class AgentFollow : MonoBehaviour
                     break;
             }
         }
+        
     }
     public void EnemyTriggered()
     {

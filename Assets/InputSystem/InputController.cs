@@ -25,14 +25,6 @@ public class @InputController : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
-                },
-                {
-                    ""name"": ""MouseMove"",
-                    ""type"": ""Value"",
-                    ""id"": ""e676e560-1e07-4bf1-a366-66b0a2ce3d1e"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -46,50 +38,6 @@ public class @InputController : IInputActionCollection, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""68a44f11-1d42-4227-b2df-05f4fbe263c8"",
-                    ""path"": ""<Joystick>/stick/up"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""b8c525e1-e196-4b16-bb19-ba4312519257"",
-                    ""path"": ""<Joystick>/stick/down"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""24ba624b-214b-4d83-8f11-f77d7435f103"",
-                    ""path"": ""<Joystick>/stick/left"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""13e6a15a-3b7c-4e05-aa7e-08fbbd229204"",
-                    ""path"": ""<Joystick>/stick/right"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""2D Vector"",
@@ -148,23 +96,12 @@ public class @InputController : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""a0802e1e-fa45-4237-a0c2-6bdd5522c8e6"",
-                    ""path"": ""<Mouse>/delta"",
+                    ""id"": ""f82346b3-4460-408b-afc9-4de86bc6e293"",
+                    ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""MouseMove"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""e308b1cd-614a-4404-9448-7cf2cb0f17da"",
-                    ""path"": ""<Touchscreen>/delta"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""MouseMove"",
+                    ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -176,7 +113,6 @@ public class @InputController : IInputActionCollection, IDisposable
         // CharacterControls
         m_CharacterControls = asset.FindActionMap("CharacterControls", throwIfNotFound: true);
         m_CharacterControls_Move = m_CharacterControls.FindAction("Move", throwIfNotFound: true);
-        m_CharacterControls_MouseMove = m_CharacterControls.FindAction("MouseMove", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -227,13 +163,11 @@ public class @InputController : IInputActionCollection, IDisposable
     private readonly InputActionMap m_CharacterControls;
     private ICharacterControlsActions m_CharacterControlsActionsCallbackInterface;
     private readonly InputAction m_CharacterControls_Move;
-    private readonly InputAction m_CharacterControls_MouseMove;
     public struct CharacterControlsActions
     {
         private @InputController m_Wrapper;
         public CharacterControlsActions(@InputController wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_CharacterControls_Move;
-        public InputAction @MouseMove => m_Wrapper.m_CharacterControls_MouseMove;
         public InputActionMap Get() { return m_Wrapper.m_CharacterControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -246,9 +180,6 @@ public class @InputController : IInputActionCollection, IDisposable
                 @Move.started -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnMove;
-                @MouseMove.started -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnMouseMove;
-                @MouseMove.performed -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnMouseMove;
-                @MouseMove.canceled -= m_Wrapper.m_CharacterControlsActionsCallbackInterface.OnMouseMove;
             }
             m_Wrapper.m_CharacterControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -256,9 +187,6 @@ public class @InputController : IInputActionCollection, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
-                @MouseMove.started += instance.OnMouseMove;
-                @MouseMove.performed += instance.OnMouseMove;
-                @MouseMove.canceled += instance.OnMouseMove;
             }
         }
     }
@@ -266,6 +194,5 @@ public class @InputController : IInputActionCollection, IDisposable
     public interface ICharacterControlsActions
     {
         void OnMove(InputAction.CallbackContext context);
-        void OnMouseMove(InputAction.CallbackContext context);
     }
 }

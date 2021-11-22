@@ -12,6 +12,9 @@ TagManager:
   - Bullet
   - FirstWave
   - ExtraPoint
+  - SecondWave
+  - ThirdWave
+  - Ground
   layers:
   - Default
   - TransparentFX

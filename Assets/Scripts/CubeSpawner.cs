@@ -7,43 +7,121 @@ public class CubeSpawner : MonoBehaviour
     [SerializeField] GameObject MickeyPrefab;
     [SerializeField] GameObject DrakePrefab;
     [SerializeField] GameObject ZombiePrefab;
-    [SerializeField] GameObject SpawnArea;
+    [SerializeField] GameObject ShootingBoardPrefab;
+    [SerializeField] GameObject SpawnArea1;
+    [SerializeField] GameObject SpawnArea2;
+    [SerializeField] GameObject SpawnArea3;
+
     Animator MickeyAnimator, ZombieAnimator, DrakeAnimator;
 
     ObjectPooler objectPooler;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    
     private void OnTriggerEnter(Collider other)
     {
-        //Instantiate(MickeyPrefab, SpawnArea.transform.position, Quaternion.identity);
-        //AgentFollow.EnemyAgent.SetDestination(PlayerModel.transform.position);
         if (other.gameObject.tag == "Player")
         {
-            switch (this.gameObject.tag)
+            if(GameManager.LevelNumber==1)
             {
-                case "FirstWave":
-                    for (int i = 0; i < 3; i++)
-                    {
-                        GameObject instantiatedMickey = ObjectPooler.Instance.SpawnForGameObject("Mickey", SpawnArea.transform.position, Quaternion.identity);
-                        MickeyAnimator = instantiatedMickey.GetComponent<Animator>();
-                        //ZombieAnimator = instantiatedZombie.GetComponent<Animator>();
-                        //DrakeAnimator = instantiatedDrake.GetComponent<Animator>();
-                        //MickeyAnimator.SetBool("isCatching", false);
-                    }
-                    GameObject instantiatedZombie = ObjectPooler.Instance.SpawnForGameObject("Zombie", SpawnArea.transform.position, Quaternion.identity);
+                switch (this.gameObject.tag)
+                {
+                    case "FirstWave":
+                        for (int i = 0; i < 3; i++)
+                        {
+                            GameObject instantiatedMickey = ObjectPooler.Instance.SpawnForGameObject("Mickey", SpawnArea1.transform.position, Quaternion.identity);
+                        }
+                        for (int i = 0; i < 2; i++)
+                        {
+                            int factor = -i;
+                            Vector3 BoardSpawnArea = Vector3.up * 2.5f + Vector3.right * 3.5f * factor + SpawnArea1.transform.position;
+                            GameObject instantiatedBoard = ObjectPooler.Instance.SpawnForGameObject("ShootingBoard", BoardSpawnArea, Quaternion.identity);
+                        }
 
-                    break;
+                        break;
+                    case "SecondWave":
+                        
+                        for (int i = 0; i < 2; i++)
+                        {
+                            GameObject instantiatedZombie = ObjectPooler.Instance.SpawnForGameObject("Zombie", SpawnArea2.transform.position, Quaternion.identity);
+                        }
+                        for (int i = 0; i < 2; i++)
+                        {
+                            int factor = i * -1;
+                            Vector3 BoardSpawnArea = Vector3.up * 2 * i + Vector3.right * 3 * factor + SpawnArea2.transform.position;
+                            GameObject instantiatedBoard = ObjectPooler.Instance.SpawnForGameObject("ShootingBoard", BoardSpawnArea, Quaternion.identity);
+                        }
+                        break;
+                    case "ThirdWave":
+                        for (int i = 0; i < 1; i++)
+                        {
+                            GameObject instantiatedDrake = ObjectPooler.Instance.SpawnForGameObject("Drake", SpawnArea3.transform.position, Quaternion.identity);
+                        }
+                        for (int i = 0; i < 2; i++)
+                        {
+                            GameObject instantiatedZombie = ObjectPooler.Instance.SpawnForGameObject("Zombie", SpawnArea3.transform.position, Quaternion.identity);
+                        }
+                        for (int i = 0; i < 2; i++)
+                        {
+                            int factor = i * -1;
+                            Vector3 BoardSpawnArea = Vector3.up * 2.5f * i + Vector3.right * 4 * factor + SpawnArea3.transform.position;
+                            GameObject instantiatedBoard = ObjectPooler.Instance.SpawnForGameObject("ShootingBoard", BoardSpawnArea, Quaternion.identity);
+                        }
+                        break;
+                }
             }
+            if (GameManager.LevelNumber == 2)
+            {
+                switch (this.gameObject.tag)
+                {
+
+                    case "FirstWave":
+                        for (int i = 0; i < 3; i++)
+                        {
+                            GameObject instantiatedMickey = ObjectPooler.Instance.SpawnForGameObject("Mickey", SpawnArea1.transform.position, Quaternion.identity);
+                        }
+                        for (int i = 0; i < 2; i++)
+                        {
+                            int factor = -i;
+                            Vector3 BoardSpawnArea = Vector3.up * 2.5f + Vector3.right * 3.5f * factor + SpawnArea1.transform.position;
+                            GameObject instantiatedBoard = ObjectPooler.Instance.SpawnForGameObject("ShootingBoard", BoardSpawnArea, Quaternion.identity);
+                        }
+
+                        break;
+                    case "SecondWave":
+                        for (int i = 0; i < 1; i++)
+                        {
+                            GameObject instantiatedMickey = ObjectPooler.Instance.SpawnForGameObject("Mickey", SpawnArea2.transform.position, Quaternion.identity);
+                        }
+                        for (int i = 0; i < 2; i++)
+                        {
+                            GameObject instantiatedZombie = ObjectPooler.Instance.SpawnForGameObject("Zombie", SpawnArea2.transform.position, Quaternion.identity);
+                        }
+                        for (int i = 0; i < 3; i++)
+                        {
+                            int factor = i * -1;
+                            Vector3 BoardSpawnArea = Vector3.up * 2 * i + Vector3.right * 3 * factor + SpawnArea2.transform.position;
+                            GameObject instantiatedBoard = ObjectPooler.Instance.SpawnForGameObject("ShootingBoard", BoardSpawnArea, Quaternion.identity);
+                        }
+                        break;
+                    case "ThirdWave":
+                        for (int i = 0; i < 1; i++)
+                        {
+                            GameObject instantiatedDrake = ObjectPooler.Instance.SpawnForGameObject("Drake", SpawnArea3.transform.position, Quaternion.identity);
+                        }
+                        for (int i = 0; i < 4; i++)
+                        {
+                            GameObject instantiatedMickey = ObjectPooler.Instance.SpawnForGameObject("Mickey", SpawnArea3.transform.position, Quaternion.identity);
+                        }
+                        for (int i = 0; i < 2; i++)
+                        {
+                            int factor = i * -1;
+                            Vector3 BoardSpawnArea = Vector3.up * 2.5f * i + Vector3.right * 4 * factor + SpawnArea3.transform.position;
+                            GameObject instantiatedBoard = ObjectPooler.Instance.SpawnForGameObject("ShootingBoard", BoardSpawnArea, Quaternion.identity);
+                        }
+                        break;
+
+                }
+            }
+            
         }        
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        //ObjectPooler.Instance.SpawnForGameObject("Cube", transform.position, Quaternion.identity);
-        //ObjectPooler.Instance.SpawnForGameObject("Sphere", transform.position, Quaternion.identity);
-        //Instantiate(CubePrefab, this.transform.position, Quaternion.identity);
     }
 }

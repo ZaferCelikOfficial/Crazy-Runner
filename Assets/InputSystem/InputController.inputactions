@@ -12,14 +12,6 @@
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
-                },
-                {
-                    "name": "MouseMove",
-                    "type": "Value",
-                    "id": "e676e560-1e07-4bf1-a366-66b0a2ce3d1e",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -33,50 +25,6 @@
                     "action": "Move",
                     "isComposite": true,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "68a44f11-1d42-4227-b2df-05f4fbe263c8",
-                    "path": "<Joystick>/stick/up",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "b8c525e1-e196-4b16-bb19-ba4312519257",
-                    "path": "<Joystick>/stick/down",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "24ba624b-214b-4d83-8f11-f77d7435f103",
-                    "path": "<Joystick>/stick/left",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "13e6a15a-3b7c-4e05-aa7e-08fbbd229204",
-                    "path": "<Joystick>/stick/right",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
                 },
                 {
                     "name": "2D Vector",
@@ -135,23 +83,12 @@
                 },
                 {
                     "name": "",
-                    "id": "a0802e1e-fa45-4237-a0c2-6bdd5522c8e6",
-                    "path": "<Mouse>/delta",
+                    "id": "f82346b3-4460-408b-afc9-4de86bc6e293",
+                    "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MouseMove",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "e308b1cd-614a-4404-9448-7cf2cb0f17da",
-                    "path": "<Touchscreen>/delta",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MouseMove",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

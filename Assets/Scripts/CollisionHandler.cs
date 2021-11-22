@@ -8,6 +8,7 @@ public class CollisionHandler : MonoBehaviour
     Animator MickeyAnimator,ZombieAnimator,DrakeAnimator;
     [SerializeField] GameObject PlayerModel;
     public GameObject Mickey, Zombie, Drake;
+    
     void Start()
     {
         PlayerAnimator = PlayerModel.GetComponent<Animator>();
@@ -49,10 +50,12 @@ public class CollisionHandler : MonoBehaviour
         GameManager.instance.OnLevelCompleted();
         
         PlayerAnimator.SetBool("isFinishing", true);
+        Debug.Log("Time Passed:"+Time.time+" Seconds");
     }
     public void EnemyTriggered()
     {
         GameManager.instance.EndGame();
         GameManager.instance.OnLevelFailed();
     }
+    
 }

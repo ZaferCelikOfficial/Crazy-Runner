@@ -5,14 +5,14 @@ using UnityEngine.InputSystem;
 public class Movement : MonoBehaviour
 {
     CharacterController PlayerCharacterController;
-    [SerializeField] float Speed= 2f;
+    float Speed= 1.5f;
     InputController PlayerInputController;
     Vector2 ReadingValue;
     Vector3 MovementValue;
     [SerializeField] GameObject PlayerModel;
     Animator PlayerAnimator;
-    float MinSpeed = 2f;
-    float MaxSpeed = 4f;
+    float MinSpeed = 1.5f;
+    float MaxSpeed = 3f;
 
     void Awake()
     {
@@ -20,9 +20,9 @@ public class Movement : MonoBehaviour
         PlayerCharacterController = this.GetComponent<CharacterController>();
         PlayerInputController = new InputController();
         
-        PlayerInputController.CharacterControls.Move.started += MovementInput;
+        /*PlayerInputController.CharacterControls.Move.started += MovementInput;
         PlayerInputController.CharacterControls.Move.performed += MovementInput;
-        PlayerInputController.CharacterControls.Move.canceled += MovementInput;
+        PlayerInputController.CharacterControls.Move.canceled += MovementInput;*/
 
         /*PlayerInputController.CharacterControls.MouseMove.started += MouseMovementInput;
         PlayerInputController.CharacterControls.MouseMove.performed += MouseMovementInput;
@@ -46,7 +46,7 @@ public class Movement : MonoBehaviour
         if (PlayerAnimator.GetBool("isWalking"))
         {
             Speed = Mathf.Clamp(Speed+Time.deltaTime, MinSpeed, MaxSpeed);
-            PlayerAnimator.SetFloat("Blend", (Speed - MinSpeed) / 2f);
+            PlayerAnimator.SetFloat("Blend", (Speed - MinSpeed)/1.5f);
             /*if(!PlayerAnimator.GetBool("isRunning")&&Speed>(MinSpeed+1.5f))
             {
                 PlayerAnimator.SetBool("isRunning", true);
@@ -58,17 +58,18 @@ public class Movement : MonoBehaviour
     {
         if (GameManager.isGameStarted&&!GameManager.isGameEnded)
         {
-            this.transform.GetComponent<CharacterController>().Move(this.transform.forward * Speed * Time.deltaTime);
-            //PlayerCharacterController.Move(MovementValue * Speed * Time.deltaTime);
+            //this.transform.GetComponent<CharacterController>().Move(this.transform.forward * Speed * Time.deltaTime);
+            MovementValue.z = this.transform.forward.z;
+            PlayerCharacterController.Move(MovementValue * Speed * Time.deltaTime);
         }
         
     }
     void MovementInput(InputAction.CallbackContext context)
     {
         //Debug.Log(context.ReadValue<Vector2>());
-        ReadingValue = context.ReadValue<Vector2>();
+        //ReadingValue = context.ReadValue<Vector2>();
         //MovementValue.x = ReadingValue.x;
-        MovementValue.z = ReadingValue.y ;
+        
         /*if(ReadingValue.x!=0|| ReadingValue.y!=0)
         {
             PlayerAnimator.SetBool("isWalking", true);

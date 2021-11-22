@@ -37,8 +37,11 @@ public class AimMove : MonoBehaviour
     {
         if (GameManager.isGameStarted && !GameManager.isGameEnded)
         {
+            this.transform.position += MovementValue * Speed * Time.deltaTime;
+            //Debug.Log(this.transform.localPosition);
             
-            AimCharacterController.Move(MovementValue * Speed * Time.deltaTime);
+            //GetComponent<CharacterController>().Move(this.transform.forward * Speed * Time.deltaTime);
+            //AimCharacterController.Move(MovementValue * Speed * Time.deltaTime);
         }
 
     }
@@ -46,7 +49,7 @@ public class AimMove : MonoBehaviour
     {
         //Debug.Log(context.ReadValue<Vector2>());
         ReadingValue = context.ReadValue<Vector2>();
-        MovementValue.x = ReadingValue.x;
+        MovementValue.x = ReadingValue.x*1.5f;
         MovementValue.y = ReadingValue.y;
         /*if(ReadingValue.x!=0|| ReadingValue.y!=0)
         {

@@ -7,6 +7,7 @@ public class Bullets : MonoBehaviour
     //bullet 
     public GameObject bullet;
     public GameObject Target;
+    AudioSource GameAudioSource;
 
 
     //bullet force
@@ -35,6 +36,7 @@ public class Bullets : MonoBehaviour
     {
         //make sure magazine is full
         readyToShoot = true;
+        GameAudioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -44,6 +46,13 @@ public class Bullets : MonoBehaviour
         //Set ammo display, if it exists :D
 
     }
+    /*void AudioStarter()
+    {
+        if(readyToShoot && GameManager.isGameStarted && !GameManager.isGameEnded && GameManager.isShootingEnabled)
+        {
+
+        }
+    }*/
     private void MyInput()
     {
         //Check if allowed to hold down button and take corresponding input
@@ -56,15 +65,23 @@ public class Bullets : MonoBehaviour
 
 
         //Shooting
-        if (readyToShoot&&GameManager.isGameStarted)
+        if (readyToShoot&&GameManager.isGameStarted&&!GameManager.isGameEnded&&GameManager.isShootingEnabled)
         {
-
+            if(!GameAudioSource.isPlaying)
+        {
+                GameAudioSource.Play(0);
+            }
             Shoot();
+        }
+        else if(!GameManager.isShootingEnabled)
+        {
+            GameAudioSource.Stop();
         }
     }
 
     private void Shoot()
     {
+        
         readyToShoot = false;
 
         //Find the exact hit position using a raycast
@@ -78,30 +95,31 @@ public class Bullets : MonoBehaviour
         //else
         //targetPoint = ray.GetPoint(75); //Just a point far away from the player
         targetPoint = Target.transform.position;
-
+        Vector3 AttackingPoint = attackPoint.transform.position;
         //Calculate direction from attackPoint to targetPoint
-        Vector3 directionWithoutSpread = targetPoint - attackPoint.position;
+        Vector3 directionWithoutSpread = targetPoint - AttackingPoint;
 
         //Calculate spread
-        float x = Random.Range(-spread, spread);
-        float y = Random.Range(-spread, spread);
+        //float x = Random.Range(-spread, spread);
+        //float y = Random.Range(-spread, spread);
 
         //Calculate new direction with spread
-        Vector3 directionWithSpread = directionWithoutSpread + new Vector3(x, y, 0); //Just add spread to last direction
+        //Vector3 directionWithSpread = directionWithoutSpread + new Vector3(x, y, 0); //Just add spread to last direction
 
         //Instantiate bullet/projectile
         ///ObjectPooler.Instance.SpawnForGameObject("Mickey", SpawnArea.transform.position, Quaternion.identity);
-        GameObject currentBullet = ObjectPooler.Instance.SpawnForGameObject("Bullet", attackPoint.position, Quaternion.identity); //Instantiate(bullet, attackPoint.position, Quaternion.identity); //store instantiated bullet in currentBullet
+        GameObject currentBullet = ObjectPooler.Instance.SpawnForGameObject("Bullet", AttackingPoint, Quaternion.identity); //Instantiate(bullet, attackPoint.position, Quaternion.identity); //store instantiated bullet in currentBullet
         //Rotate bullet to shoot direction
-        currentBullet.transform.forward = directionWithSpread.normalized;
+        currentBullet.transform.forward = directionWithoutSpread.normalized;
 
         //Add forces to bullet
-        currentBullet.GetComponent<Rigidbody>().AddForce(directionWithSpread.normalized * shootForce, ForceMode.Impulse);
+        //currentBullet.GetComponent<Rigidbody>().AddForce(directionWithoutSpread.normalized * shootForce, ForceMode.Impulse);
+        currentBullet.GetComponent<Rigidbody>().AddForce(directionWithoutSpread.normalized*shootForce, ForceMode.Impulse);
 
 
         //Instantiate muzzle flash, if you have one
         //if (muzzleFlash != null)
-           // Instantiate(muzzleFlash, attackPoint.position, Quaternion.identity);
+        // Instantiate(muzzleFlash, attackPoint.position, Quaternion.identity);
 
 
         //Invoke resetShot function (if not already invoked), with your timeBetweenShooting
@@ -115,7 +133,7 @@ public class Bullets : MonoBehaviour
         }
 
         //if more than one bulletsPerTap make sure to repeat shoot function
-        if (true)
+        if (true&&GameManager.isShootingEnabled)
             Invoke("Shoot", timeBetweenShots);
     }
     private void ResetShot()
