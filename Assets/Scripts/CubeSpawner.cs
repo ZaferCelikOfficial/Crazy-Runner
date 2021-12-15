@@ -27,6 +27,8 @@ public class CubeSpawner : MonoBehaviour
                     case "FirstWave":
                         for (int i = 0; i < 3; i++)
                         {
+                            
+                            SpawnArea1.transform.position = new Vector3(Random.Range(-5.0f, 5.0f), SpawnArea1.transform.position.y, SpawnArea1.transform.position.z+Random.Range(-10f,10f));
                             GameObject instantiatedMickey = ObjectPooler.Instance.SpawnForGameObject("Mickey", SpawnArea1.transform.position, Quaternion.identity);
                         }
                         for (int i = 0; i < 2; i++)

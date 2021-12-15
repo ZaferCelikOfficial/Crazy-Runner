@@ -6,19 +6,17 @@ using UnityEngine.AI;
 public class AgentFollow : MonoBehaviour
 {
     NavMeshAgent EnemyAgent;
+    Movement playerMovement;
 
-    // Start is called before the first frame update
     void Start()
     {
         EnemyAgent = GetComponent<NavMeshAgent>();
-        
+        playerMovement = FindObjectOfType<Movement>();
     }
-    
 
-    // Update is called once per frame
     void Update()
     {
-        EnemyAgent.SetDestination(PlayerPositionReader.PlayerPosition);
+        EnemyAgent.SetDestination(playerMovement.transform.position);
         
         if (EnemyAgent.remainingDistance <3.5f&&EnemyAgent.remainingDistance>0)
         {

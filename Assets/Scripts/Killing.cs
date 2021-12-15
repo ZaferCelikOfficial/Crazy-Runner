@@ -68,13 +68,5 @@ public class Killing : MonoBehaviour
                     }
             }
     }
-    /*private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Mickey")
-        {
-            Destroy(collision.gameObject);
-            Debug.Log("Managed to trigger");
-        }
-    }*/
 }
 

@@ -1256,7 +1256,6 @@ GameObject:
   - component: {fileID: 4560267417738062005}
   - component: {fileID: 8248554478574277557}
   - component: {fileID: 1266096391555878589}
-  - component: {fileID: 8248554478574277562}
   m_Layer: 0
   m_Name: PlayerRig3
   m_TagString: Player
@@ -1309,7 +1308,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26923f2b3a5093b4d966a7f1df44a137, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 4
   PlayerModel: {fileID: 3713282626287053908}
 --- !u!114 &8248554478574277557
 MonoBehaviour:
@@ -1348,18 +1346,6 @@ MonoBehaviour:
   timeBetweenShots: 0.5
   attackPoint: {fileID: 8248554477127467886}
   allowInvoke: 1
---- !u!114 &8248554478574277562
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4560267417738062006}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1a03dac2ccb245498f48e6fe6158a05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5250811483759904602
 GameObject:
   m_ObjectHideFlags: 0

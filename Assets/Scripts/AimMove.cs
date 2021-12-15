@@ -20,60 +20,25 @@ public class AimMove : MonoBehaviour
         AimInputController.CharacterControls.Move.started += MovementInput;
         AimInputController.CharacterControls.Move.performed += MovementInput;
         AimInputController.CharacterControls.Move.canceled += MovementInput;
-
-        /*PlayerInputController.CharacterControls.MouseMove.started += MouseMovementInput;
-        PlayerInputController.CharacterControls.MouseMove.performed += MouseMovementInput;
-        PlayerInputController.CharacterControls.MouseMove.canceled += MouseMovementInput;*/
-
-       
     }
     void Update()
     {
-
         MoveAim();
-        
     }
     void MoveAim()
     {
         if (GameManager.isGameStarted && !GameManager.isGameEnded)
         {
             this.transform.position += MovementValue * Speed * Time.deltaTime;
-            //Debug.Log(this.transform.localPosition);
-            
-            //GetComponent<CharacterController>().Move(this.transform.forward * Speed * Time.deltaTime);
-            //AimCharacterController.Move(MovementValue * Speed * Time.deltaTime);
         }
 
     }
     void MovementInput(InputAction.CallbackContext context)
     {
-        //Debug.Log(context.ReadValue<Vector2>());
         ReadingValue = context.ReadValue<Vector2>();
         MovementValue.x = ReadingValue.x*1.5f;
         MovementValue.y = ReadingValue.y;
-        /*if(ReadingValue.x!=0|| ReadingValue.y!=0)
-        {
-            PlayerAnimator.SetBool("isWalking", true);
-        }
-        if(GameManager.isGameStarted)
-        {
-            PlayerAnimator.SetBool("isWalking", true);
-        } 
-        
-        else
-        {
-            Speed = MinSpeed;
-            PlayerAnimator.SetBool("isWalking", false);
-            PlayerAnimator.SetBool("isRunning", false);
-        }*/
     }
-    /*void MouseMovementInput(InputAction.CallbackContext context)
-    {
-        Debug.Log(context.ReadValue<Vector2>());
-        ReadingValue = context.ReadValue<Vector2>();
-        MovementValue.x = ReadingValue.x / 4f;
-    }*/
-    
     void OnEnable()
     {
         AimInputController.Enable();

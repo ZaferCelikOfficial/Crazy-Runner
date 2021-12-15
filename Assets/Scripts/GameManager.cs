@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] int LevelIndex = 0;
     int PointsCounted;
     int LastCounted;
+    Movement movement;
 
     private void Awake()
     {
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         HighScore = PlayerPrefs.GetInt("HighScore");
+        movement = FindObjectOfType<Movement>();
     }
     public void CreateLevel()
     {
@@ -48,6 +50,7 @@ public class GameManager : MonoBehaviour
     }
     public void StartGame()
     {
+        movement.enabled = true;
         isGameStarted = true;
         isGameEnded = false;
         isShootingEnabled = true;
@@ -73,6 +76,7 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         isGameStarted = false;
+        movement.enabled = false;
     }
     public void NextLevel()
     {
@@ -80,6 +84,7 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("LevelNo", LevelIndex);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         isGameStarted = false;
+        movement.enabled = false;
         
     }
     public void PointCounter(int thisCount)
@@ -87,7 +92,6 @@ public class GameManager : MonoBehaviour
 
         PointsCounted = LastCounted + thisCount;
         LastCounted = PointsCounted;
-        Debug.Log(LastCounted);
         ScoreText.text = LastCounted.ToString();
         HighScoreText.text = HighScore.ToString();
         if(LastCounted>HighScore)
